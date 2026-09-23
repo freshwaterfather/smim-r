@@ -4,7 +4,7 @@ title: "smimr: Stochastic Mobile-Immobile Model (SMIM) fits to solute breakthrou
 type: software
 authors:
   - family-names: Liddick
-    given-names: Mitch
+    given-names: Mitchell J.
     email: mliddick@nd.edu
     affiliation: University of Notre Dame
 version: 0.0.0.9000
