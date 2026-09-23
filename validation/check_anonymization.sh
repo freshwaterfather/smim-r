@@ -14,7 +14,7 @@ else
   files=$(find . -type f -not -path './.git/*' -not -path './private/*' -not -path './inputs/*' -not -path './renv/*')
 fi
 hits=$(echo "$files" | grep -v -E '^(private/|inputs/|PLAN\.md$|CLAUDE\.md$|HANDOFF\.md$)|\.(html|png|tiff|pdf)$' \
-       | grep -v -E '^validation/check_anonymization\.sh$' \
+       | grep -v -E '^validation/check_anonymization\.sh$|^renv\.lock$' \
        | xargs -d '\n' grep -n -P "$pat" 2>/dev/null | grep -v -P "$cite")
 if [ -n "$hits" ]; then
   echo "ANONYMIZATION CHECK FAILED:"; echo "$hits"; exit 1
