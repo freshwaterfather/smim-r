@@ -10,6 +10,25 @@ btc_labels <- function() {
        time = "Time since release (s)")
 }
 
+#' Figure theme following the Methods in Stream Ecology figure guidelines
+#'
+#' Arial lettering, 14-pt axis numbers, 16-pt axis labels and bold axis lines, on top of
+#' [ggplot2::theme_classic()].
+#' @param family font family (default "Arial"; Helvetica and Calibri are also accepted by
+#'   the publisher).
+#' @return a `ggplot2` theme.
+#' @export
+theme_mise <- function(family = "Arial") {
+  ggplot2::theme_classic(base_size = 14, base_family = family) +
+    ggplot2::theme(axis.text = ggplot2::element_text(size = 14, colour = "black"),
+                   axis.title = ggplot2::element_text(size = 16),
+                   axis.line = ggplot2::element_line(linewidth = 0.9, colour = "black"),
+                   axis.ticks = ggplot2::element_line(linewidth = 0.7, colour = "black"),
+                   axis.ticks.length = ggplot2::unit(4, "pt"),
+                   strip.background = ggplot2::element_blank(),
+                   strip.text = ggplot2::element_text(size = 14, face = "bold"))
+}
+
 #' Observed breakthrough curves and SMIM fits: linear–linear and log–log panels
 #'
 #' Follows the presentation of Volponi et al. (2025, Figs 2 and 4): a linear–linear panel
@@ -41,9 +60,8 @@ plot_btc_fits <- function(obs, fit, labels = btc_labels(), log_floor = 1e-3,
     ggplot2::geom_line(data = f, ggplot2::aes(x = t_s, y = C), colour = "black", linewidth = 0.7) +
     ggplot2::facet_wrap(~site, nrow = 1, labeller = ggplot2::labeller(site = function(s) paste("Stream", s))) +
     ggplot2::labs(x = labels$time, y = labels$conc) +
-    ggplot2::theme_classic(base_size = 11) +
-    ggplot2::theme(strip.background = ggplot2::element_blank(),
-                   strip.text = ggplot2::element_text(face = "bold"))
+    theme_mise() +
+    ggplot2::theme(panel.spacing = ggplot2::unit(0.8, "lines"))
   fmt <- function(x) format(x, scientific = FALSE, drop0trailing = TRUE, trim = TRUE)
   list(linear = base(obs[obs$t_s >= 0, ], fit) +
          ggplot2::scale_x_continuous(limits = c(0, NA), expand = ggplot2::expansion(mult = c(0, 0.03))),
@@ -69,7 +87,7 @@ save_btc_figure <- function(p, path_base, width = 7.2, height = 3.2) {
 #' Fitted SMIM parameters per stream as a four-panel bar figure
 #'
 #' One bar per stream for each of the four fitted parameters, in the layout and with the
-#' axis labels of Volponi et al. (2025, Fig. 5): velocity (top left), dispersion (top
+#' axis labels of Volponi et al. (2025, Fig. 5), velocity written as V: velocity (top left), dispersion (top
 #' right), exchange rate (bottom left) and power-law slope (bottom right). Thin error bars
 #' show ± one standard error when the `se_*` columns are present.
 #'
@@ -81,7 +99,7 @@ save_btc_figure <- function(p, path_base, width = 7.2, height = 3.2) {
 #' @export
 plot_smim_params <- function(results, fill = "grey55") {
   if (!requireNamespace("ggplot2", quietly = TRUE)) stop("ggplot2 is required")
-  pars <- c(v_m_s = "Velocity~'['*italic(U)*', m/s'*']'",
+  pars <- c(v_m_s = "Velocity~'['*italic(V)*', m/s'*']'",
             D_m2_s = "Dispersion~'['*italic(D)*', m'^2*'/s'*']'",
             Lambda_1_s = "Exchange~Rate~'['*Lambda*', 1/s'*']'",
             beta = "Power~Law~Slope~'['*beta*']'")
@@ -96,9 +114,9 @@ plot_smim_params <- function(results, fill = "grey55") {
                         labeller = ggplot2::label_parsed) +
     ggplot2::scale_y_continuous(expand = ggplot2::expansion(mult = c(0, 0.08))) +
     ggplot2::labs(x = "Stream", y = NULL) +
-    ggplot2::theme_classic(base_size = 11) +
-    ggplot2::theme(strip.background = ggplot2::element_blank(), strip.placement = "outside",
-                   strip.text.y.left = ggplot2::element_text(angle = 90, size = 10),
+    theme_mise() +
+    ggplot2::theme(strip.placement = "outside",
+                   strip.text.y.left = ggplot2::element_text(angle = 90, size = 16, face = "plain"),
                    panel.spacing = ggplot2::unit(1, "lines"))
   if (any(!is.na(long$se))) {
     p <- p + ggplot2::geom_errorbar(ggplot2::aes(ymin = value - se, ymax = value + se), width = 0.2, linewidth = 0.4)

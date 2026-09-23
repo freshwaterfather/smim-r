@@ -62,8 +62,8 @@ print(results, digits = 4)
 write.csv(results, "analysis/example_four_streams_results.csv", row.names = FALSE)
 
 p <- plot_btc_fits(do.call(rbind, obs), do.call(rbind, fitc), x_breaks = c(300, 1000, 2000), x_logticks = TRUE)  # arrivals are > 300 s here
-save_btc_figure(p$linear, "figures/example_four_streams_linear", width = 7.2, height = 3.1)
-save_btc_figure(p$loglog, "figures/example_four_streams_loglog", width = 7.2, height = 3.1)
+save_btc_figure(p$linear, "figures/example_four_streams_linear", width = 9.5, height = 4.6)
+save_btc_figure(p$loglog, "figures/example_four_streams_loglog", width = 9.5, height = 4.6)
 
 # Fitted parameters per stream (layout and labels of Volponi et al. 2025, Fig. 5)
-save_btc_figure(plot_smim_params(results), "figures/example_four_streams_params", width = 5.5, height = 4.6)
+save_btc_figure(plot_smim_params(results), "figures/example_four_streams_params", width = 7, height = 6)

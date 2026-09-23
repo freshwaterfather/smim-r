@@ -18,7 +18,7 @@ a \code{ggplot} object (2 × 2 facets with the parameter label on the y axis).
 }
 \description{
 One bar per stream for each of the four fitted parameters, in the layout and with the
-axis labels of Volponi et al. (2025, Fig. 5): velocity (top left), dispersion (top
+axis labels of Volponi et al. (2025, Fig. 5), velocity written as V: velocity (top left), dispersion (top
 right), exchange rate (bottom left) and power-law slope (bottom right). Thin error bars
 show ± one standard error when the \verb{se_*} columns are present.
 }

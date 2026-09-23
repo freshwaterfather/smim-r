@@ -24,3 +24,4 @@ renv/local/
 figures/*_files/
 validation/matlab_out/her_example/
 figures/*.html
+outputs/
