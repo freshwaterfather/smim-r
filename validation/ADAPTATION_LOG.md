@@ -29,10 +29,23 @@ Purpose: prove the toolchain on her `example_Release1` sheet before touching our
 Everything else (bounds, midpoint guess, `cNorm` call, `SMIMfit` call, covariance and
 standard-error lines 107–140, results table) is copied verbatim.
 
-Outcome: the run was started but cancelled after 14 of 61 starts when the project scope was
-reduced (each start takes ~4 min with six free parameters because `igamma` is evaluated
-through the Symbolic engine). The wrapper is provided for anyone who wants to complete it;
-`validation/compare_her_example.R` compares its output with her `SMIMResults.xls`.
+Outcome (`validation/matlab_out/her_example/`, `validation/compare_her_example.R`):
+- Environment: re-evaluating her archived parameters (`example_Release1.mat`) with the installed
+  toolboxes returns her archived objective exactly (Σf² = 7.86401958561e-06, all digits); mass
+  recovery (0.32601) and Q reproduce to 6e-6. The toolchain is therefore the same as hers.
+- Fit: the current `Lead_SMIM.m` settings (six free parameters, bounds mid-point guess, 61 seeded
+  starts, 196 min) converge to a different local minimum (β = 0.0011, log₁₀t₂ = 11.5 near the
+  bound, Σf² = 8.49e-06) than her archived fit (β = 0.276, log₁₀t₂ = 5.33, Σf² = 7.86e-06).
+  Her archived run used an older driver (`flagGuess`, `flagMuG` in the .mat) started at the
+  previous solution, so it is not reproducible from the shipped script; the six-parameter
+  problem is multimodal, which is consistent with the paper fixing t₁ and t₂.
+- R on her data: `igamma_complex` matches a 34-digit `vpa` reference to 1e-16 at her arguments
+  (τ = 4.6e-6 and 3.8e-12); the Laplace-domain values agree to 7e-13; R's inversion applied to
+  MATLAB's own Laplace values reproduces MATLAB's curve to 2e-14. The curves nevertheless differ by
+  1.2e-4 (archived parameters) and 3e-2 (reproduced parameters) of the peak because her example's
+  sharply peaked curve at 2795 m is extremely ill-conditioned for the de Hoog inversion: 1e-13
+  input noise spreads the output by 2.7e-5 and 3.4e-3 of the peak respectively (3.7e-9 on our
+  curves). See `VALIDATION_REPORT.md` §2.
 
 ## 2. Running her code on our BTCs (`load_btc.m`, `run_phase_a.m`)
 

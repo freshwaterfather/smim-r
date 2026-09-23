@@ -41,6 +41,18 @@ the inversion at the original's settings is itself noisy near fitted optima: per
 parameters by a relative 1e-12 changes the curve by ~1e-7 of its peak, and the objective by
 ~1e-6–1e-5 relative. That noise floor, not the port, sets what "equal" can mean.
 
+### Her own example (2795-m reach, `example_Release1`)
+The archived parameters re-evaluated in the installed MATLAB return the archived objective to all
+digits (toolchain check). On the same data the R and MATLAB `igamma` values agree with a 34-digit
+reference to 1e-16 and the Laplace-domain values to 7e-13, and R's inversion fed with MATLAB's
+Laplace values reproduces MATLAB's curve to 2e-14 — but the two independently computed curves
+differ by 1.2e-4 of the peak, because that sharply peaked curve is ~10⁴ times worse conditioned for
+the de Hoog inversion than the example curves here (1e-13 input noise → 2.7e-5 of the peak vs
+3.7e-9). Re-fitting her example with the shipped six-parameter settings and 61 seeded starts also
+lands in a different local minimum (β ≈ 0.001, log₁₀t₂ ≈ 11.5) than her archived fit (β = 0.28,
+log₁₀t₂ = 5.3), which was started from a previous solution; the six-parameter problem is
+multimodal, consistent with the paper's choice to fix t₁ and t₂. Details: `ADAPTATION_LOG.md` §1.
+
 ## 3. Fitted parameters (equivalence item 3)
 
 Fits were compared on four curves (not all from the published example) with identical start
