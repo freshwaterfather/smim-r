@@ -4,13 +4,22 @@
 \alias{plot_btc_fits}
 \title{Observed breakthrough curves and SMIM fits: linear–linear and log–log panels}
 \usage{
-plot_btc_fits(obs, fit, labels = btc_labels(), log_floor = 0.001)
+plot_btc_fits(
+  obs,
+  fit,
+  labels = btc_labels(),
+  log_floor = 0.001,
+  x_breaks = c(10, 100, 1000),
+  y_breaks = 10^(-2:3)
+)
 }
 \arguments{
 \item{obs}{data frame with columns \code{site}, \code{t_s}, \code{C} and logical \code{in_window}: all
 background-corrected observations from the release onward (µg L⁻¹, s); rows with
 \code{in_window = TRUE} are the fitted points. The linear panel shows every row; the
-log–log panel shows the fitted rows with \code{C > log_floor}.}
+log–log panel shows every positive row (\code{t > 0}, \code{C > log_floor}), so the low
+pre-arrival values fill the decades before the rising limb, as in the original
+figures.}
 
 \item{fit}{data frame with columns \code{site}, \code{t_s}, \code{C}: the fitted model on a fine time
 grid, scaled to the observation units.}
@@ -18,6 +27,8 @@ grid, scaled to the observation units.}
 \item{labels}{list from \code{\link[=btc_labels]{btc_labels()}}.}
 
 \item{log_floor}{concentrations at or below this are omitted from the log–log panel.}
+
+\item{x_breaks, y_breaks}{major tick positions of the log–log panel (no minor ticks).}
 }
 \value{
 list of two \code{ggplot} objects, \code{linear} and \code{loglog}.

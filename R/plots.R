@@ -27,14 +27,18 @@ btc_labels <- function(html = FALSE) {
 #' @param obs data frame with columns `site`, `t_s`, `C` and logical `in_window`: all
 #'   background-corrected observations from the release onward (µg L⁻¹, s); rows with
 #'   `in_window = TRUE` are the fitted points. The linear panel shows every row; the
-#'   log–log panel shows the fitted rows with `C > log_floor`.
+#'   log–log panel shows every positive row (`t > 0`, `C > log_floor`), so the low
+#'   pre-arrival values fill the decades before the rising limb, as in the original
+#'   figures.
 #' @param fit data frame with columns `site`, `t_s`, `C`: the fitted model on a fine time
 #'   grid, scaled to the observation units.
 #' @param labels list from [btc_labels()].
 #' @param log_floor concentrations at or below this are omitted from the log–log panel.
+#' @param x_breaks,y_breaks major tick positions of the log–log panel (no minor ticks).
 #' @return list of two `ggplot` objects, `linear` and `loglog`.
 #' @export
-plot_btc_fits <- function(obs, fit, labels = btc_labels(), log_floor = 1e-3) {
+plot_btc_fits <- function(obs, fit, labels = btc_labels(), log_floor = 1e-3,
+                          x_breaks = c(10, 100, 1000), y_breaks = 10^(-2:3)) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) stop("ggplot2 is required")
   if (is.null(obs$in_window)) obs$in_window <- TRUE
   base <- function(o, f) ggplot2::ggplot() +
@@ -49,9 +53,9 @@ plot_btc_fits <- function(obs, fit, labels = btc_labels(), log_floor = 1e-3) {
   fmt <- function(x) format(x, scientific = FALSE, drop0trailing = TRUE, trim = TRUE)
   list(linear = base(obs[obs$t_s >= 0, ], fit) +
          ggplot2::scale_x_continuous(limits = c(0, NA), expand = ggplot2::expansion(mult = c(0, 0.03))),
-       loglog = base(obs[obs$in_window & obs$C > log_floor, ], fit[fit$C > log_floor & fit$t_s > 0, ]) +
-         ggplot2::scale_x_log10(labels = fmt) + ggplot2::scale_y_log10(labels = fmt) +
-         ggplot2::annotation_logticks(sides = "bl"))
+       loglog = base(obs[obs$t_s > 0 & obs$C > log_floor, ], fit[fit$C > log_floor & fit$t_s > 0, ]) +
+         ggplot2::scale_x_log10(breaks = x_breaks, labels = fmt, limits = c(min(x_breaks), NA)) +
+         ggplot2::scale_y_log10(breaks = y_breaks, labels = fmt))
 }
 
 #' Save a figure as PDF, 600-dpi PNG and TIFF, and an interactive HTML (plotly)
