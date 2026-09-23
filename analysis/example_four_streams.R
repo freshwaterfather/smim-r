@@ -4,7 +4,7 @@
 # (streams A-D, one release) and draw the chapter figure.
 #
 # Run from the repository root after installing the package:
-#   remotes::install_github("mjliddick/smim-r")
+#   remotes::install_github("freshwaterfather/smim-r")
 #   source("analysis/example_four_streams.R")
 #
 # Inputs:  data/example_btc.csv     site, t_s (s since release), C_ugL (background-corrected)

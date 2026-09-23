@@ -14,7 +14,7 @@ Stream Ecology*, 4th edition, and provides the example figure there.
 ## Install
 
 ```r
-remotes::install_github("mjliddick/smim-r")
+remotes::install_github("freshwaterfather/smim-r")
 ```
 
 ## Quick start

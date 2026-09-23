@@ -9,7 +9,7 @@ authors:
     affiliation: University of Notre Dame
 version: 0.0.0.9000
 license: MIT
-repository-code: "https://github.com/mjliddick/smim-r"
+repository-code: "https://github.com/freshwaterfather/smim-r"
 abstract: >-
   An R port of the SMIMfit MATLAB library (Schmidt 2020; Volponi 2024) for fitting the
   truncated-power-law Stochastic Mobile-Immobile Model to conservative-tracer breakthrough
