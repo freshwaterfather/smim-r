@@ -17,22 +17,26 @@ btc_labels <- function(html = FALSE) {
   }
 }
 
-#' Observed breakthrough curves and SMIM fits, linear and log panels
+#' Observed breakthrough curves and SMIM fits: linear–linear and log–log panels
 #'
-#' Observed data are drawn as open points and the fitted model as a black line, one
-#' column per site, in two figures (linear and log10 concentration) so the tail fit is
-#' visible. Legible in grayscale.
+#' Follows the presentation of Volponi et al. (2025, Figs 2 and 4): a linear–linear panel
+#' with the time axis starting at the release (t = 0), and a log–log panel that makes the
+#' power-law tail visible. Observed data are drawn as open points and the fitted model as a
+#' black line, one column per site. Legible in grayscale.
 #'
-#' @param obs data frame with columns `site`, `t_s`, `C`: the corrected, background-
-#'   subtracted observations inside the fit window (µg L⁻¹, s).
+#' @param obs data frame with columns `site`, `t_s`, `C` and logical `in_window`: all
+#'   background-corrected observations from the release onward (µg L⁻¹, s); rows with
+#'   `in_window = TRUE` are the fitted points. The linear panel shows every row; the
+#'   log–log panel shows the fitted rows with `C > log_floor`.
 #' @param fit data frame with columns `site`, `t_s`, `C`: the fitted model on a fine time
 #'   grid, scaled to the observation units.
 #' @param labels list from [btc_labels()].
-#' @param log_floor concentrations at or below this are omitted from the log panel.
-#' @return list of two `ggplot` objects, `linear` and `log`.
+#' @param log_floor concentrations at or below this are omitted from the log–log panel.
+#' @return list of two `ggplot` objects, `linear` and `loglog`.
 #' @export
 plot_btc_fits <- function(obs, fit, labels = btc_labels(), log_floor = 1e-3) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) stop("ggplot2 is required")
+  if (is.null(obs$in_window)) obs$in_window <- TRUE
   base <- function(o, f) ggplot2::ggplot() +
     ggplot2::geom_point(data = o, ggplot2::aes(x = t_s, y = C), shape = 21, size = 1.4,
                         colour = "grey25", fill = "white", stroke = 0.5) +
@@ -42,10 +46,12 @@ plot_btc_fits <- function(obs, fit, labels = btc_labels(), log_floor = 1e-3) {
     ggplot2::theme_classic(base_size = 11) +
     ggplot2::theme(strip.background = ggplot2::element_blank(),
                    strip.text = ggplot2::element_text(face = "bold"))
-  list(linear = base(obs, fit),
-       log = base(obs[obs$C > log_floor, ], fit[fit$C > log_floor, ]) +
-         ggplot2::scale_y_log10(labels = function(x) format(x, scientific = FALSE, drop0trailing = TRUE)) +
-         ggplot2::annotation_logticks(sides = "l"))
+  fmt <- function(x) format(x, scientific = FALSE, drop0trailing = TRUE, trim = TRUE)
+  list(linear = base(obs[obs$t_s >= 0, ], fit) +
+         ggplot2::scale_x_continuous(limits = c(0, NA), expand = ggplot2::expansion(mult = c(0, 0.03))),
+       loglog = base(obs[obs$in_window & obs$C > log_floor, ], fit[fit$C > log_floor & fit$t_s > 0, ]) +
+         ggplot2::scale_x_log10(labels = fmt) + ggplot2::scale_y_log10(labels = fmt) +
+         ggplot2::annotation_logticks(sides = "bl"))
 }
 
 #' Save a figure as PDF, 600-dpi PNG and TIFF, and an interactive HTML (plotly)

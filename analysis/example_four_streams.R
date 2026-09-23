@@ -45,12 +45,15 @@ for (s in cfg$site) {
                              resnorm = fit$resnorm, r2_lin = fit$diagnostics$r2_lin,
                              r2_log = fit$diagnostics$r2_log)
 
-  # 3. Curves in observation units for the figure
+  # 3. Curves in observation units for the figure: all observations from the release
+  #    onward (fitted ones flagged), model on a fine grid from the first sample interval
   area <- pracma::trapz(prep$t_all, prep$C_all)
-  tg <- seq(min(prep$tobs), max(prep$tobs), length.out = 400)
+  tg <- exp(seq(log(min(diff(di$t_s))), log(max(prep$tobs)), length.out = 400))
   fg <- smim_forward(fit$params, tg, ci$reach_length_m)
   fg <- fg / pracma::trapz(prep$tobs, smim_forward(fit$params, prep$tobs, ci$reach_length_m)) * area
-  obs[[s]] <- data.frame(site = s, t_s = prep$tobs, C = prep$cobs * area)
+  keep <- di$t_s >= 0
+  obs[[s]] <- data.frame(site = s, t_s = di$t_s[keep], C = di$C_ugL[keep],
+                         in_window = di$t_s[keep] %in% prep$tobs)
   fitc[[s]] <- data.frame(site = s, t_s = tg, C = fg)
 }
 results <- do.call(rbind, results)
@@ -58,5 +61,5 @@ print(results, digits = 4)
 write.csv(results, "analysis/example_four_streams_results.csv", row.names = FALSE)
 
 p <- plot_btc_fits(do.call(rbind, obs), do.call(rbind, fitc))
-save_btc_figure(p$linear, "figures/example_four_streams_linear", width = 7.2, height = 2.6)
-save_btc_figure(p$log, "figures/example_four_streams_log", width = 7.2, height = 2.6)
+save_btc_figure(p$linear, "figures/example_four_streams_linear", width = 7.2, height = 3.1)
+save_btc_figure(p$loglog, "figures/example_four_streams_loglog", width = 7.2, height = 3.1)

@@ -2,26 +2,29 @@
 % Please edit documentation in R/plots.R
 \name{plot_btc_fits}
 \alias{plot_btc_fits}
-\title{Observed breakthrough curves and SMIM fits, linear and log panels}
+\title{Observed breakthrough curves and SMIM fits: linear–linear and log–log panels}
 \usage{
 plot_btc_fits(obs, fit, labels = btc_labels(), log_floor = 0.001)
 }
 \arguments{
-\item{obs}{data frame with columns \code{site}, \code{t_s}, \code{C}: the corrected, background-
-subtracted observations inside the fit window (µg L⁻¹, s).}
+\item{obs}{data frame with columns \code{site}, \code{t_s}, \code{C} and logical \code{in_window}: all
+background-corrected observations from the release onward (µg L⁻¹, s); rows with
+\code{in_window = TRUE} are the fitted points. The linear panel shows every row; the
+log–log panel shows the fitted rows with \code{C > log_floor}.}
 
 \item{fit}{data frame with columns \code{site}, \code{t_s}, \code{C}: the fitted model on a fine time
 grid, scaled to the observation units.}
 
 \item{labels}{list from \code{\link[=btc_labels]{btc_labels()}}.}
 
-\item{log_floor}{concentrations at or below this are omitted from the log panel.}
+\item{log_floor}{concentrations at or below this are omitted from the log–log panel.}
 }
 \value{
-list of two \code{ggplot} objects, \code{linear} and \code{log}.
+list of two \code{ggplot} objects, \code{linear} and \code{loglog}.
 }
 \description{
-Observed data are drawn as open points and the fitted model as a black line, one
-column per site, in two figures (linear and log10 concentration) so the tail fit is
-visible. Legible in grayscale.
+Follows the presentation of Volponi et al. (2025, Figs 2 and 4): a linear–linear panel
+with the time axis starting at the release (t = 0), and a log–log panel that makes the
+power-law tail visible. Observed data are drawn as open points and the fitted model as a
+black line, one column per site. Legible in grayscale.
 }

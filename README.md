@@ -36,7 +36,7 @@ fit$se_volponi    # standard errors as computed by the original Lead_SMIM.m
 fit$diagnostics   # linear and log R^2, weighted mean absolute error
 ```
 
-The full worked example (four streams, figure in linear and log scale) is
+The full worked example (four streams, figure in linear–linear and log–log scale) is
 `analysis/example_four_streams.R`.
 
 ## What it does
