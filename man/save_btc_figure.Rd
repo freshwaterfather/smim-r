@@ -2,26 +2,18 @@
 % Please edit documentation in R/plots.R
 \name{save_btc_figure}
 \alias{save_btc_figure}
-\title{Save a figure as PDF, 600-dpi PNG and TIFF, and an interactive HTML (plotly)}
+\title{Save a figure as PDF, 600-dpi PNG and 600-dpi TIFF}
 \usage{
-save_btc_figure(
-  p,
-  path_base,
-  width = 7.2,
-  height = 3.2,
-  html_labels = btc_labels(html = TRUE)
-)
+save_btc_figure(p, path_base, width = 7.2, height = 3.2)
 }
 \arguments{
 \item{p}{a ggplot object. @param path_base file path without extension.}
 
-\item{width, height}{inches. @param html_labels list from \code{btc_labels(html = TRUE)}.}
+\item{width, height}{inches.}
 }
 \value{
 invisibly, the vector of files written.
 }
 \description{
-The static files use the plotmath labels of \code{p}; the HTML version is rebuilt with
-\code{plotly::ggplotly()} and the HTML labels from \code{\link[=btc_labels]{btc_labels()}}, because plotly does not
-render plotmath.
+Save a figure as PDF, 600-dpi PNG and 600-dpi TIFF
 }

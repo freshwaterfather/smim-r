@@ -2,16 +2,12 @@
 % Please edit documentation in R/plots.R
 \name{btc_labels}
 \alias{btc_labels}
-\title{Axis labels for breakthrough-curve figures (plotmath for static, HTML for plotly)}
+\title{Axis labels for breakthrough-curve figures (plotmath)}
 \usage{
-btc_labels(html = FALSE)
-}
-\arguments{
-\item{html}{logical; return HTML markup (for \code{plotly}, which ignores plotmath) instead
-of plotmath expressions.}
+btc_labels()
 }
 \value{
-list \code{conc}, \code{time}.
+list \code{conc}, \code{time} of plotmath expressions.
 }
 \description{
 Units are taken from the data (the package's example data are in µg L⁻¹ and s).

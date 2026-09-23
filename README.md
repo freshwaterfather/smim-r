@@ -36,7 +36,7 @@ fit$se_volponi    # standard errors as computed by the original Lead_SMIM.m
 fit$diagnostics   # linear and log R^2, weighted mean absolute error
 ```
 
-The full worked example (four streams, figure in linear–linear and log–log scale) is
+The full worked example (four streams; breakthrough curves in linear–linear and log–log scale, and a bar figure of the fitted parameters) is
 `analysis/example_four_streams.R`.
 
 ## What it does
@@ -49,7 +49,7 @@ The full worked example (four streams, figure in linear–linear and log–log s
 | Bounded trust-region-reflective least squares | `trf_lsq()` | `lsqnonlin` (trust-region-reflective) |
 | Multi-start from Latin-hypercube points, best local solution refined | `smim_fit()`, `lhs_bounded()` | `runFit.m`, `lhsdesignbnd.m`, `MultiStart` |
 | Standard errors | `smim_standard_errors()` | `Lead_SMIM.m` lines 107–140 |
-| Figures | `plot_btc_fits()`, `save_btc_figure()` | — |
+| Figures | `plot_btc_fits()`, `plot_smim_params()`, `save_btc_figure()` | — |
 
 **Which objective?** `"volponi"` (the default) reproduces the published method: the 1/C
 weighting lets the peak dominate, so velocity and peak shape are matched best and the model

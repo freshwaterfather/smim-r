@@ -23,3 +23,4 @@ renv/local/
 # rendered figures are build products of analysis/example_four_streams.R
 figures/*_files/
 validation/matlab_out/her_example/
+figures/*.html
