@@ -10,7 +10,8 @@ plot_btc_fits(
   labels = btc_labels(),
   log_floor = 0.001,
   x_breaks = c(10, 100, 1000),
-  y_breaks = 10^(-2:3)
+  y_breaks = 10^(-2:3),
+  x_logticks = FALSE
 )
 }
 \arguments{
@@ -28,7 +29,9 @@ grid, scaled to the observation units.}
 
 \item{log_floor}{concentrations at or below this are omitted from the log–log panel.}
 
-\item{x_breaks, y_breaks}{major tick positions of the log–log panel (no minor ticks).}
+\item{x_breaks, y_breaks}{major tick positions of the log–log panel.}
+
+\item{x_logticks}{logical; draw log minor ticks on the x axis of the log–log panel.}
 }
 \value{
 list of two \code{ggplot} objects, \code{linear} and \code{loglog}.

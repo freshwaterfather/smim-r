@@ -60,6 +60,6 @@ results <- do.call(rbind, results)
 print(results, digits = 4)
 write.csv(results, "analysis/example_four_streams_results.csv", row.names = FALSE)
 
-p <- plot_btc_fits(do.call(rbind, obs), do.call(rbind, fitc), x_breaks = c(100, 1000))  # arrivals are > 300 s here
+p <- plot_btc_fits(do.call(rbind, obs), do.call(rbind, fitc), x_breaks = c(300, 1000, 2000), x_logticks = TRUE)  # arrivals are > 300 s here
 save_btc_figure(p$linear, "figures/example_four_streams_linear", width = 7.2, height = 3.1)
 save_btc_figure(p$loglog, "figures/example_four_streams_loglog", width = 7.2, height = 3.1)

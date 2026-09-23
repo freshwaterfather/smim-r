@@ -34,11 +34,12 @@ btc_labels <- function(html = FALSE) {
 #'   grid, scaled to the observation units.
 #' @param labels list from [btc_labels()].
 #' @param log_floor concentrations at or below this are omitted from the log–log panel.
-#' @param x_breaks,y_breaks major tick positions of the log–log panel (no minor ticks).
+#' @param x_breaks,y_breaks major tick positions of the log–log panel.
+#' @param x_logticks logical; draw log minor ticks on the x axis of the log–log panel.
 #' @return list of two `ggplot` objects, `linear` and `loglog`.
 #' @export
 plot_btc_fits <- function(obs, fit, labels = btc_labels(), log_floor = 1e-3,
-                          x_breaks = c(10, 100, 1000), y_breaks = 10^(-2:3)) {
+                          x_breaks = c(10, 100, 1000), y_breaks = 10^(-2:3), x_logticks = FALSE) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) stop("ggplot2 is required")
   if (is.null(obs$in_window)) obs$in_window <- TRUE
   base <- function(o, f) ggplot2::ggplot() +
@@ -55,7 +56,8 @@ plot_btc_fits <- function(obs, fit, labels = btc_labels(), log_floor = 1e-3,
          ggplot2::scale_x_continuous(limits = c(0, NA), expand = ggplot2::expansion(mult = c(0, 0.03))),
        loglog = base(obs[obs$t_s > 0 & obs$C > log_floor, ], fit[fit$C > log_floor & fit$t_s > 0, ]) +
          ggplot2::scale_x_log10(breaks = x_breaks, labels = fmt, limits = c(min(x_breaks), NA)) +
-         ggplot2::scale_y_log10(breaks = y_breaks, labels = fmt))
+         ggplot2::scale_y_log10(breaks = y_breaks, labels = fmt) +
+         (if (x_logticks) ggplot2::annotation_logticks(sides = "b") else NULL))
 }
 
 #' Save a figure as PDF, 600-dpi PNG and TIFF, and an interactive HTML (plotly)
