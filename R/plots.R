@@ -6,8 +6,8 @@ utils::globalVariables(c("t_s", "C", "site"))
 #' @return list `conc`, `time` of plotmath expressions.
 #' @export
 btc_labels <- function() {
-  list(conc = expression(paste("Rhodamine WT concentration, ", italic(C), " (", mu, "g L"^-1, ")")),
-       time = expression(paste("Time since release, ", italic(t), " (s)")))
+  list(conc = expression(paste("Rhodamine WT concentration (", mu, "g L"^-1, ")")),
+       time = "Time since release (s)")
 }
 
 #' Observed breakthrough curves and SMIM fits: linear–linear and log–log panels
