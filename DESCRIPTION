@@ -2,7 +2,7 @@ Package: smimr
 Title: Stochastic Mobile-Immobile Model (SMIM) Fits to Solute Breakthrough Curves
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Mitch", "Liddick", email = "mliddick@nd.edu", role = c("aut", "cre")),
+    person("Mitchell J.", "Liddick", email = "mliddick@nd.edu", role = c("aut", "cre")),
     person("Sabrina N.", "Volponi", role = "aut", comment = "author of the original MATLAB SMIMfit (Zenodo 10.5281/zenodo.11147719, CC BY 4.0)"),
     person("Michael J.", "Schmidt", role = "aut", comment = "author of the original SMIMfit library (github.com/mjs271/SMIMfit)"))
 Description: An R port of the SMIMfit MATLAB library of Volponi (2024) and Schmidt (2020)
