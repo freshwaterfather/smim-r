@@ -1,0 +1,25 @@
+# Never published: raw identifiers, private pipeline, read-only inputs, project instructions
+private/
+inputs/
+PLAN.md
+CLAUDE.md
+HANDOFF.md
+
+# R / renv
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+renv/library/
+renv/staging/
+renv/local/
+*.Rcheck/
+
+# MATLAB scratch
+*.asv
+*.mat
+*.fig
+
+# rendered figures are build products of analysis/example_four_streams.R
+figures/*_files/
+validation/matlab_out/her_example/

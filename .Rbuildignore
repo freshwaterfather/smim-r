@@ -1,0 +1,16 @@
+^private$
+^inputs$
+^validation$
+^analysis$
+^figures$
+^PLAN\.md$
+^HANDOFF\.md$
+^CLAUDE\.md$
+^\.gitignore$
+^renv$
+^renv\.lock$
+^\.Rprofile$
+^CITATION\.cff$
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$

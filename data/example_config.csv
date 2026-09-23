@@ -1,0 +1,5 @@
+site,reach_length_m,discharge_L_s,tracer_mass_mg,inject_duration_s,hit_time_s,fit_t_end_s,noise_sigma_ugL
+A,60,2,98.9,0,480,2580,0.01176
+B,60,2,98.9,0,360,1980,0.15968
+C,60,2,98.9,0,390,2550,0.04433
+D,60,2.16,98.9,0,420,2670,0.00445

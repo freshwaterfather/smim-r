@@ -1,0 +1,82 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the R port and the original MATLAB SMIMfit library and paper."
+title: "smimr: Stochastic Mobile-Immobile Model (SMIM) fits to solute breakthrough curves in R"
+type: software
+authors:
+  - family-names: Liddick
+    given-names: Mitch
+    email: mliddick@nd.edu
+    affiliation: University of Notre Dame
+version: 0.0.0.9000
+license: MIT
+repository-code: "https://github.com/mjliddick/smim-r"
+abstract: >-
+  An R port of the SMIMfit MATLAB library (Schmidt 2020; Volponi 2024) for fitting the
+  truncated-power-law Stochastic Mobile-Immobile Model to conservative-tracer breakthrough
+  curves, with scripted numerical-equivalence checks against the MATLAB original.
+references:
+  - type: software
+    title: "SMIMfit library [MATLAB], SMIMfit_2.0"
+    authors:
+      - family-names: Volponi
+        given-names: Sabrina N.
+    year: 2024
+    doi: 10.5281/zenodo.11147719
+    url: "https://github.com/SabrinaVolponi/SMIMfit"
+    license: CC-BY-4.0
+  - type: software
+    title: "SMIMfit library [MATLAB]"
+    authors:
+      - family-names: Schmidt
+        given-names: Michael J.
+    year: 2020
+    url: "https://github.com/mjs271/SMIMfit"
+  - type: article
+    title: "Biofilm development, senescence, and benthic substrate influence hyporheic transport in streams"
+    authors:
+      - family-names: Volponi
+        given-names: Sabrina N.
+      - family-names: Tank
+        given-names: Jennifer L.
+      - family-names: Vincent
+        given-names: Anna E. S.
+      - family-names: Snyder
+        given-names: Elise D.
+      - family-names: Pruitt
+        given-names: Abagael N.
+      - family-names: Bolster
+        given-names: Diogo
+    journal: "Journal of Geophysical Research: Biogeosciences"
+    volume: 130
+    year: 2025
+    doi: 10.1029/2024JG008225
+  - type: article
+    title: "FracFit: A robust parameter estimation tool for fractional calculus models"
+    authors:
+      - family-names: Kelly
+        given-names: James F.
+      - family-names: Bolster
+        given-names: Diogo
+      - family-names: Meerschaert
+        given-names: Mark M.
+      - family-names: Drummond
+        given-names: Jennifer D.
+      - family-names: Packman
+        given-names: Aaron I.
+    journal: "Water Resources Research"
+    volume: 53
+    year: 2017
+    doi: 10.1002/2016WR019748
+  - type: article
+    title: "An improved method for numerical inversion of Laplace transforms"
+    authors:
+      - family-names: de Hoog
+        given-names: F. R.
+      - family-names: Knight
+        given-names: J. H.
+      - family-names: Stokes
+        given-names: A. N.
+    journal: "SIAM Journal on Scientific and Statistical Computing"
+    volume: 3
+    year: 1982
+    doi: 10.1137/0903022

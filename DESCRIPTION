@@ -1,0 +1,32 @@
+Package: smimr
+Title: Stochastic Mobile-Immobile Model (SMIM) Fits to Solute Breakthrough Curves
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Mitch", "Liddick", email = "mliddick@nd.edu", role = c("aut", "cre")),
+    person("Sabrina N.", "Volponi", role = "aut", comment = "author of the original MATLAB SMIMfit (Zenodo 10.5281/zenodo.11147719, CC BY 4.0)"),
+    person("Michael J.", "Schmidt", role = "aut", comment = "author of the original SMIMfit library (github.com/mjs271/SMIMfit)"))
+Description: An R port of the SMIMfit MATLAB library of Volponi (2024) and Schmidt (2020)
+    for fitting the truncated-power-law Stochastic Mobile-Immobile Model of Volponi et al.
+    (2025) <doi:10.1029/2024JG008225> to conservative-tracer breakthrough curves: the de Hoog
+    inverse Laplace transform, the complex incomplete-gamma waiting-time transform, the
+    1/C-weighted objective of the original plus a log-residual alternative, Latin-hypercube
+    multi-start bounded least squares, and Jacobian-based standard errors. Numerical
+    equivalence with the MATLAB original is checked by the package tests.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: R (>= 4.1)
+Imports:
+    pracma,
+    stats
+Suggests:
+    testthat (>= 3.0.0),
+    ggplot2,
+    plotly,
+    ggtext,
+    lhs,
+    dplyr,
+    tidyr,
+    readr
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0
